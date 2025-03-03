@@ -8,14 +8,16 @@ fn main() {
    let window:Window = Window::new_centered("Pendulum Project", (800,400)).unwrap();
 
    let win: MywindowHandler = MywindowHandler {
-        p:Pendulum::new(400.0,0.0,200.0)
+        p:Pendulum::new(400.0,0.0,200.0),
+        p2: Pendulum::new(400.0, 0.2, 100.0),
    };
 
    window.run_loop(win);
 }
 
 struct MywindowHandler {
-    p: Pendulum
+    p: Pendulum,
+    p2: Pendulum
 }
 
 impl WindowHandler for MywindowHandler{
@@ -29,6 +31,9 @@ impl WindowHandler for MywindowHandler{
 
         self.p.update();
         self.p.draw(graphics);
+        self.p2.update();
+        self.p2.draw(graphics);
+
         helper.request_redraw();
     }
 }
@@ -60,7 +65,7 @@ impl Pendulum {
             angular_aceleration: 0.0,
             r: r,
             m: 1.0,
-            g: 1.5,
+            g: 0.9,
             
         }
     }
